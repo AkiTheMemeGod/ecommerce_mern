@@ -2,11 +2,11 @@ import Product from "../models/Product.js";
 
 export async function addItem_Product(req, res){
     try{
-        const {name, description, price, category, stock, imageUrl} = req.body
-        const newProduct = new Product({name, description, price, category, stock, imageUrl})
+        const {name, description, Price, category, stock, imageUrl} = req.body
+        const newProduct = new Product({name, description, Price, category, stock, imageUrl})
         await newProduct.save()
-        res.status(201).json({"message": "Product created", note: newNote})
-    }
+        res.status(201).json({"message": "Product created", prodcut: newProduct})
+    }   
     catch(error){
         console.error("Error Adding Product:", error);
         res.status(500).json({"message": "Server error"});
@@ -27,19 +27,19 @@ export async function deleteItem_Product(req, res){
 
 export async function updateItem_Product(req, res){
     try{
-        const {name, description, price, category, stock, imageUrl} = req.body
+        const {name, description, Price, category, stock, imageUrl} = req.body
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id,
-            {name, description, price, category, stock, imageUrl},
+            {name, description, Price, category, stock, imageUrl},
             {
             new: true,
         }
         );
         if(!updatedProduct) return res.status(404).json({"message": "Product not found"})
-        res.status(200).json({"message": "Product updated", note: Note})
+        res.status(200).json({"message": "Product updated", updatedProduct: Product})
     }
     catch(error){
-        console.error("Error updating note:", error);
+        console.error("Error updating Product:", error);
         res.status(500).json({"message": "Server error"});
     }
 }
