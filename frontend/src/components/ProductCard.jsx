@@ -1,6 +1,26 @@
 import { Link } from "react-router-dom"
+import toast from "react-hot-toast";
+import axiosUtil from '../services/axios.js'
+import { getUserIdFromToken } from "../services/jwt_util.js";
+
 
 const ProductCard = ({product}) => {
+
+  const handleAddToCart = async () => {
+    try{
+      const res = await axiosUtil.cart.post(`/add/${product._id}`,{
+        "userId": getUserIdFromToken(),
+      })
+      console.log(res)
+      toast.success("Added To Cart Successfully");
+  }
+
+  catch(error){
+    console.error(error)
+  }
+}
+
+
   return (
   <div className="card card-compact bg-base-100 w-96 shadow-xl">
   <figure>
@@ -13,10 +33,8 @@ const ProductCard = ({product}) => {
     <p>{product.description}</p>
     <div className="card-actions justify-between">
       <h3 className='card-title'>Rs.{product.Price}/- only</h3>
-      <Link to={`/product/${product._id}`}>
-      <button className="btn btn-secondary">View Details</button>
-      </Link>
-      <button className="btn btn-primary">Add To Cart</button>
+      <Link to={`/product/${product._id}`}>View Details</Link>
+      <button className="btn btn-primary" onClick={handleAddToCart}>Add To Cart</button>
 
       
     </div>
