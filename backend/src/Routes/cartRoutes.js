@@ -3,7 +3,7 @@ import {getItems_Cart, addItem_Cart, deleteItem_Cart, updateItem_Cart} from '../
 
 const router = express.Router()
 
-router.get("/",getItems_Cart)
+router.get("/:id",getItems_Cart)
 router.post("/add/:id",addItem_Cart)
 router.delete("/delete/:id",deleteItem_Cart)
 router.put("/update/:id",updateItem_Cart)
