@@ -63,7 +63,8 @@ export async function updateItem_Cart(req, res) {
 
 export async function getItems_Cart(req, res){
     try {
-        const cart_items = await Cart.find();
+        const userId = req.params.id;
+        const cart_items = await Cart.findOne({userId});
         res.status(200).json(cart_items);
     } catch (error) {
         console.log("Error Fetching Items in the cart ", error);
