@@ -3,10 +3,21 @@ import CartTile from "../components/CartTile";
 import getUserIdFromToken from "../services/jwt_util.js";
 import {useState, useEffect} from 'react';
 import axiosUtil from '../services/axios.js';
+import toast from "react-hot-toast";
 const CartPage = () => {
   const [cart, setCart] = useState(null);
   const userId = getUserIdFromToken();
+  const handleCheckout = async() => {
+    try {
+    const res = await axiosUtil.order.post("/checkout",{
+      "userId" : getUserIdFromToken(),
+      "items" : cart.items})
+    toast.success("Successfully placed Order");
 
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -67,6 +78,7 @@ const CartPage = () => {
           />
         ))}
       </div>
+      <button className="btn btn-accent" onClick={handleCheckout}>Checkout Order</button>
     </div>
   );
 };
