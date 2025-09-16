@@ -1,0 +1,54 @@
+[ User ] 
+   │
+   ▼
+ ┌──────────┐
+ │  Home    │   (GET /api/products → show featured)
+ └────┬─────┘
+      │ Click "View All"
+      ▼
+ ┌───────────────┐
+ │ Product List  │  (GET /api/products → show all)
+ └────┬──────────┘
+      │ Click on product
+      ▼
+ ┌─────────────────────┐
+ │ Product Details     │ (GET /api/products/:id)
+ │  - name, desc, qty  │
+ │  - "Add to Cart"    │
+ └─────────┬───────────┘
+           │ Add to Cart
+           ▼
+ ┌───────────────────────┐
+ │   Cart Page (/cart)   │ (GET /api/cart/:userId)
+ │  - See items          │
+ │  - Update qty         │ (PUT /api/cart/:itemId)
+ │  - Remove item        │ (DELETE /api/cart/:itemId)
+ │  - Checkout           │
+ └─────────┬─────────────┘
+           │ Click Checkout
+           ▼
+ ┌───────────────────────┐
+ │   Auth Check          │
+ │  - If not logged in → │
+ │    Redirect to Login  │
+ └─────────┬─────────────┘
+           │
+           ▼
+ ┌─────────────────────┐
+ │ Login/Register Page │
+ │  - POST /api/auth   │
+ │  - Get JWT, save it │
+ └─────────┬───────────┘
+           │ Success
+           ▼
+ ┌──────────────────────┐
+ │ Checkout / Order Page│ (POST /api/orders)
+ │  - Confirm order     │
+ │  - Clear cart        │
+ └─────────┬────────────┘
+           │
+           ▼
+ ┌───────────────────┐
+ │ Profile (/profile)│ (GET /api/orders/:userId)
+ │ - Show past orders│
+ └───────────────────┘
