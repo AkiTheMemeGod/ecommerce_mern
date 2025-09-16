@@ -53,3 +53,15 @@ export async function getItems_Product(req, res){
         res.status(500).json({"message" : "Error Fetching Products"});
     }
 }
+
+export async function getItem_Product(req, res){
+    try {
+        const _id = req.params.id
+        console.log(_id)
+        const product = await Product.findOne({_id});
+        res.status(200).json(product);
+    } catch (error) {
+        console.log("Error Fetching all the Products ", error);
+        res.status(500).json({"message" : "Error Fetching Products"});
+    }
+}
