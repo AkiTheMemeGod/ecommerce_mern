@@ -18,7 +18,7 @@ const cartSchema = mongoose.Schema(
                 default: 1
             }
             }
-        ]
+        ],
     }
 );
 
